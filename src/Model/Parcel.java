@@ -140,13 +140,13 @@ public class Parcel {
 
     @Override
     public String toString() {
-        return "Parcel{" +
-                "isFragile=" + isFragile +
+        return
+                " isFragile=" + isFragile +
                 ", price=" + price +
-                ", driver=" + driver +
+                ", driver= " + driver +
                 ", size=" + size +
                 ", orderCreated=" + orderCreated +
-                ", plannedDelivery=" + plannedDelivery +
+                ", plannedDelivery= " + plannedDelivery +
                 '}';
     }
 }

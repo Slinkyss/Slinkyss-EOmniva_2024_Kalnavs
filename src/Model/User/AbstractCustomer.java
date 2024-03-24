@@ -17,7 +17,7 @@ public abstract class AbstractCustomer{
 
     protected String customerCode;
 
-    private long counter = 0;
+    private static long counter = 0;
 
     private ArrayList<Parcel> parcels = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public abstract class AbstractCustomer{
     }
 
     public void setPhoneNo(String phoneNo) {
-        if(phoneNo != null && phoneNo.matches(("([0-9]+)")) && phoneNo.length() == 7){
+        if(phoneNo != null && phoneNo.matches(("([0-9]+)")) && phoneNo.length() == 8){
             this.phoneNo = phoneNo;
         }else {
             this.phoneNo = "empty_number";
@@ -91,12 +91,12 @@ public abstract class AbstractCustomer{
 
     @Override
     public String toString() {
-        return "{" +
+        return
                 "cID=" + cID +
-                ", address=" + address +
+                ", " + address +
                 ", phoneNo='" + phoneNo + '\'' +
                  '\'' +
-                ", parcels=" + parcels +
-                '}';
+                ", parcels=" + parcels
+                 ;
     }
 }

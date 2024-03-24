@@ -23,7 +23,6 @@ public class CustomerAsPerson extends AbstractCustomerAsPerson{
 
     @Override
     public String toString() {
-        return "CustomerAsPerson{" +
-                "person=" + super.toString() + customerCode + '}';
+        return "CustomerAsPerson{ " + super.toString() +  "CustomerCode = " + customerCode + '}';
     }
 }

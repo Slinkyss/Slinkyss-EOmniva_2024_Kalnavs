@@ -35,7 +35,7 @@ public class Person {
     }
 
     public void setPersonCode(String personCode) {
-        if(personCode != null && personCode.matches("([0-9]+[-]+[0-9]+)") && personCode.length() == 12) {
+        if(personCode != null && personCode.matches("([0-9]+[-]+[0-9]+)") && personCode.length() == 11) {
             this.personCode = personCode;
         }
         else{
@@ -59,7 +59,7 @@ public class Person {
 
     public String toString(){
 
-        return name + " " + surname + "id " + personCode;
+        return "name = " + name + " surname = " + surname +  " PersonCode = " + personCode + " ";
     }
 
     public String getPersonCode() {

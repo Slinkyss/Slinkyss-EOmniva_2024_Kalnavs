@@ -21,8 +21,8 @@ public abstract class AbstractCustomerAsPerson extends AbstractCustomer{
 
     @Override
     public String toString() {
-        return "AbstractCustomerAsPerson{" +
-                "person=" + super.toString() + person +
-                '}';
+        return
+                " " + person + super.toString()
+                ;
     }
 }

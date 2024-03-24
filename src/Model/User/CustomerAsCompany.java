@@ -33,7 +33,7 @@ public class CustomerAsCompany extends AbstractCustomer{
     }
 
     public void setCompanyRegNo(String companyRegNo) {
-        if(companyRegNo != null ) {
+        if(companyRegNo != null  && companyRegNo.matches("([0-9]+)") && companyRegNo.length() == 11) {
             this.companyRegNo = companyRegNo;
         }
         else{
@@ -57,8 +57,8 @@ public class CustomerAsCompany extends AbstractCustomer{
 
     @Override
     public String toString() {
-        return "CustomerAsCompany {" + super.toString() +
-                "title='" + title + '\'' +
+        return "CustomerAsCompany {" +
+                "title='" + title + '\'' + " "+ super.toString() +
                 ", companyRegNo='" + companyRegNo + '\'' +
                 ", customerCode='" + customerCode + '\'' +
                 '}';

@@ -2,7 +2,7 @@ package Model;
 
 import Model.User.Person;
 
-public class Driver extends Person{
+public class Driver extends Person {
 
     private double dID;
     private String licenseNo;
@@ -59,7 +59,7 @@ public class Driver extends Person{
 
     @Override
     public String toString() {
-        return "Driver{" +
+        return "Driver{"  + super.toString() +
                 "dID=" + dID +
                 ", licenseNo='" + licenseNo + '\'' +
                 ", ExperienceInYears=" + ExperienceInYears +
