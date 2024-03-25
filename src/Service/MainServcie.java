@@ -11,6 +11,7 @@ import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class MainServcie {
 
@@ -137,6 +138,10 @@ public class MainServcie {
             System.out.println("Printed out parcel stats");
             System.out.println(Arrays.toString(retrieveStatisticsOfCustomerParcelSize(c2.getCustomerCode())));
             System.out.println("-------------------------------");
+            sortDriversByExperience();
+            for (Driver tempDr : driverList) {
+                System.out.println(tempDr);
+            }
 
 
 
@@ -461,4 +466,25 @@ public class MainServcie {
         return parcels;
 
     }
+
+    public static void sortDriversByExperience() throws Exception{
+        if(driverList.isEmpty()){
+            throw new Exception("Driver list is empty");
+        }
+
+        for(int i = 0; i < driverList.size(); i++){
+            for(int j = 0; j < driverList.size(); j++){
+                if(driverList.get(i).getExperienceInYears() < driverList.get(j).getExperienceInYears()){
+                    Driver tempDriver = driverList.get(i);
+                    driverList.set(i,driverList.get(j));
+                    driverList.set(j,tempDriver);
+                }
+            }
+        }
+
+    }
+
+
+
+  
 }
