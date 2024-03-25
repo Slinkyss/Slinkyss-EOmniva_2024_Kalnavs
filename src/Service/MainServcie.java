@@ -1,9 +1,7 @@
 package Service;
 
 import Model.*;
-import Model.User.AbstractCustomer;
-import Model.User.CustomerAsCompany;
-import Model.User.CustomerAsPerson;
+import Model.User.*;
 import org.w3c.dom.ls.LSOutput;
 
 import java.lang.reflect.Array;
@@ -65,7 +63,7 @@ public class MainServcie {
 
 
         } catch (Exception e) {
-            System.out.println("Kaut kas nav ar driver");
+            System.out.println(e);
         }
 
         try {
@@ -101,7 +99,7 @@ public class MainServcie {
             System.out.println("-------------------------------");
 
         } catch (Exception e) {
-            System.out.println("Kaut kas nav ar customer");
+            System.out.println(e);
         }
 
         try {
@@ -129,7 +127,7 @@ public class MainServcie {
             System.out.println("Calculate customers parcel price");
             System.out.println(calculatePriceOfAllCustomerParcelsByCustomerCode(c2.getCustomerCode()));
             System.out.println("Price with added new parcel");
-            createNewParcelForCustomer(ParcelSize.M,true,d1, c2.getCustomerCode());
+            createNewParcelForCustomer(ParcelSize.M, true, d1, c2.getCustomerCode());
             for (Parcel temp : retrieveAllParcelByCustomerCode(c2.getCustomerCode())) {
                 System.out.println(temp);
             }
@@ -138,17 +136,17 @@ public class MainServcie {
             System.out.println("Printed out parcel stats");
             System.out.println(Arrays.toString(retrieveStatisticsOfCustomerParcelSize(c2.getCustomerCode())));
             System.out.println("-------------------------------");
+            System.out.println("Sorted drivers by experience");
             sortDriversByExperience();
             for (Driver tempDr : driverList) {
                 System.out.println(tempDr);
             }
-
-
+            System.out.println("-------------------------------");
 
 
         } catch (Exception e) {
-            System.out.printf("Kaut kas nav ar e funkciju");
-        }
+            System.out.println(e);
+    }
 
     }
 
@@ -163,8 +161,8 @@ public class MainServcie {
         }
 
         for (Driver tempDr : driverList) {
-            if (tempDr.getName().equals(name) || tempDr.getPersonCode().equals(personCode)) {
-                throw new Exception(name + " " + surname + "already exists");
+            if (tempDr.getPersonCode().equals(personCode)) {
+                throw new Exception(name + " " + surname + " already exists");
             }
         }
         Driver driver = new Driver(name, surname, personCode, licenseNo, experienceInYears);
@@ -243,6 +241,10 @@ public class MainServcie {
             }
 
         }
+
+        if(customerPersonList.isEmpty()){
+            throw new Exception("There are no  people that have ordered something");
+        }
         return customerPersonList;
 
     }
@@ -254,6 +256,11 @@ public class MainServcie {
                 customerAsCompany.add((CustomerAsCompany) tempComp);
             }
         }
+
+        if(customerAsCompany.isEmpty()){
+            throw new Exception("There are no companies that have ordered something");
+        }
+
         return customerAsCompany;
     }
 
@@ -265,12 +272,14 @@ public class MainServcie {
         }
         CustomerAsPerson temp = new CustomerAsPerson(name, surname, personCode, address, phone);
 
-
-        for (AbstractCustomer tempCus : customersList) {
-            if (tempCus.getCustomerCode().equals(temp.getCustomerCode())) {
-                throw new Exception("Customer already exists");
+        for(AbstractCustomerAsPerson tempor : retrieveAllCustomersAsPerson()){
+            if(tempor.getPhoneNo().equals(phone)){
+                throw new Exception("Person with this number already exists");
             }
         }
+
+
+
 
         customersList.add(temp);
 
@@ -282,11 +291,15 @@ public class MainServcie {
         }
         CustomerAsCompany temp = new CustomerAsCompany(address, phone, title, companyRegNo);
 
-        for (AbstractCustomer tempCus : customersList) {
-            if (tempCus.getCustomerCode().equals(temp.getCustomerCode())) {
-                throw new Exception("Company already exists");
+        for(CustomerAsCompany tempor : retrieveAllCustomersAsCompany()){
+            if(tempor.getCompanyRegNo().equals(companyRegNo)){
+                throw new Exception("Company with this CompanyRegister number already exists");
             }
         }
+
+
+
+
 
         customersList.add(temp);
 
@@ -371,7 +384,7 @@ public class MainServcie {
 
         }
         if (parcels.isEmpty()) {
-            throw new Exception("Driver has no parcels to deliver");
+            throw new Exception("There are no parcels");
         }
         return parcels;
     }
@@ -395,7 +408,7 @@ public class MainServcie {
         }
 
         if (parcels.isEmpty()) {
-            throw new Exception("Driver has no parcels to deliver");
+            throw new Exception("There are no parcels");
         }
         return SizeParcels;
     }
@@ -420,7 +433,7 @@ public class MainServcie {
             result += parcel.getPrice();
         }
         if (customerParcels.isEmpty()) {
-            throw new Exception("Driver has no parcels to deliver");
+            throw new Exception("There are no prices to calculate");
         }
 
 
