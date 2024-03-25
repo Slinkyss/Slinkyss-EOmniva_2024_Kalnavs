@@ -89,6 +89,14 @@ public abstract class AbstractCustomer{
         setPhoneNo(phoneNo);
     }
 
+    public void addNewParcel(Parcel parcel)throws Exception{
+        if(parcel == null){
+            throw new Exception("wrong input");
+        }
+
+        parcels.add(parcel);
+    }
+
     @Override
     public String toString() {
         return
